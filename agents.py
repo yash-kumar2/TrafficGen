@@ -17,8 +17,10 @@ class AgentState(TypedDict):
     semantic_context: str
     scenario_type: str # 'standard' or 'emergency'
 
+import os
+
 # Setup Gemini model
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)
+llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0, api_key=os.environ.get("GOOGLE_API_KEY"))
 llm_with_tools = llm.bind_tools(action_tools)
 
 def extract_token_usage(res) -> int:
